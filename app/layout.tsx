@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import NavBar from '../components/navbar/NavBar';
+
 import { ThemeProvider } from '@mui/material';
+
+import NavBar from '../components/navbar/NavBar';
+
+// eslint-disable-next-line import/extensions
 import theme from '@/theme';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -15,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <ThemeProvider theme={theme}>
-        <body className={inter.className}>
+        <body className={inter.className} style={{ margin: '0 100px' }}>
           <NavBar />
           {children}
         </body>

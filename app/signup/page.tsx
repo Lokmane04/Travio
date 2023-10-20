@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Box, InputBase, InputLabel, Typography } from '@mui/material';
+
 import Image from 'next/image';
-import { StyledButton } from '../../theme';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import Link from 'next/link';
 
-const SignIn = () => {
+import FacebookIcon from '@mui/icons-material/Facebook';
+import { Box, Divider, InputBase, InputLabel, Typography } from '@mui/material';
+
+import { StyledButton } from '../../theme';
+
+const SignUp = () => {
   return (
     <Box mt="8%">
       <Box
@@ -42,7 +45,10 @@ const SignIn = () => {
         >
           Continue With Email
         </StyledButton>
-        <Typography>or use one of these options</Typography>
+        <Box width="100%" mb={1}>
+          <Divider>or use one of these options</Divider>
+        </Box>
+
         <StyledButton
           variant="outlined"
           size="large"
@@ -63,12 +69,21 @@ const SignIn = () => {
         >
           Continue With Facebook
         </StyledButton>
-        <Typography variant="h3" mt={7} mr={5}>
-          Already have an account ? <Link href="/signin"> Sign In</Link>
-        </Typography>
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
+          my={4}
+        >
+          <Typography variant="h3">Already have an account ?</Typography>
+          <Link href="/signin" style={{ textDecoration: 'none', marginLeft: '8px' }}>
+            <Typography color="primary">Sign In</Typography>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
 };
 
-export default SignIn;
+export default SignUp;

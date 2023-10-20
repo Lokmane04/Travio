@@ -4,7 +4,7 @@ import { Box, InputBase, InputLabel, Typography } from '@mui/material';
 import Link from 'next/link';
 import { StyledButton } from '@/theme';
 
-const ForgotPassword = () => {
+const CreatePasswordPage = () => {
   return (
     <Box mt="5%">
       <Box
@@ -18,18 +18,34 @@ const ForgotPassword = () => {
         }}
       >
         <Typography variant="h1" mb="10px">
-          Forgot your password ?
+          Create Password
         </Typography>
         <Typography variant="subtitle1" textAlign="center" mb="30px">
-          We’ll send you a link to reset it. Enter your email address used for My Dream Place
+          Use a minimum of 10 characters, including letters, lowercase letters, and numbers.
         </Typography>
-        <InputLabel htmlFor="email-input" sx={{ mr: '65%' }}>
-          Your email address
+        <InputLabel htmlFor="email-input" sx={{ mr: '80%' }}>
+          Password
         </InputLabel>
         <InputBase
           required
-          id="email-input"
+          id="password-input"
           fullWidth
+          type="password"
+          sx={{
+            m: '10px 0 20px 0',
+            bgcolor: '#f4f4f4',
+            borderRadius: '0.38rem',
+            p: '12px',
+          }}
+        />
+        <InputLabel htmlFor="confirm-password-input" sx={{ mr: '65%' }}>
+          Confirm Password
+        </InputLabel>
+        <InputBase
+          required
+          id="confirm-password-input"
+          fullWidth
+          type="password"
           sx={{
             m: '10px 0 20px 0',
             bgcolor: '#f4f4f4',
@@ -43,7 +59,7 @@ const ForgotPassword = () => {
           fullWidth
           sx={{ mb: '15px', p: '12px 18px' }}
         >
-          Send reset link
+          Create account
         </StyledButton>
         <Box display="flex" width="100%">
           <Typography variant="subtitle1" textAlign="center">
@@ -62,4 +78,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default CreatePasswordPage;
