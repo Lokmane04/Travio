@@ -1,3 +1,4 @@
+'use client';
 import { Button, createTheme, styled } from '@mui/material';
 
 const theme = createTheme({
@@ -13,17 +14,17 @@ const theme = createTheme({
       '800': '#1e40af',
       '900': '#475993',
     },
-    secondary: {
-      '100': '#FCEFCA',
-      '200': '#fde68a',
-      '300': '#fcd34d',
-      '400': '#F2C94C',
-      '500': '#f59e0b',
-      '600': '#F2994A',
-      '700': '#b45309',
-      '800': '#92400e',
-      '900': '#78350f',
-    },
+    // secondary: {
+    //   '100': '#FCEFCA',
+    //   '200': '#fde68a',
+    //   '300': '#fcd34d',
+    //   '400': '#F2C94C',
+    //   '500': '#f59e0b',
+    //   '600': '#F2994A',
+    //   '700': '#b45309',
+    //   '800': '#92400e',
+    //   '900': '#78350f',
+    // },
     success: {
       main: '#219653',
       light: '#85E0AB',
@@ -96,11 +97,9 @@ const theme = createTheme({
 export const StyledButton = styled(Button)({
   borderRadius: '0.38rem',
   display: 'flex',
-  width: '22.5rem',
   p: '0.75rem 1.125rem',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: '0.625rem',
 });
 
 export default theme;
