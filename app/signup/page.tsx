@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { StyledButton } from '../../theme';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Link from 'next/link';
-const SignUp = () => {
+
+const SignIn = () => {
   return (
     <Box mt="8%">
       <Box
@@ -57,7 +58,7 @@ const SignUp = () => {
           size="large"
           fullWidth
           variant="contained"
-          sx={{ bgcolor: 'primary[900]' }}
+          sx={{ bgcolor: 'primary.dark' }}
           startIcon={<FacebookIcon />}
         >
           Continue With Facebook
@@ -70,4 +71,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

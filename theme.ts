@@ -4,27 +4,13 @@ import { Button, createTheme, styled } from '@mui/material';
 const theme = createTheme({
   palette: {
     primary: {
-      '100': '#dbeafe',
-      '200': '#bfdbfe',
-      '300': '#bfdbfe',
-      '400': '#60a5fa',
-      '500': '#2F80ED',
-      '600': '#2563eb',
-      '700': '#1d4ed8',
-      '800': '#1e40af',
-      '900': '#475993',
+      main: '#2F80ED',
+      dark: '#475993',
     },
     secondary: {
-      A400: '#5f4f4f',
-      '100': '#FCEFCA',
-      '200': '#fde68a',
-      '300': '#fcd34d',
-      '400': '#F2C94C',
-      '500': '#f59e0b',
-      '600': '#F2994A',
-      '700': '#b45309',
-      '800': '#92400e',
-      '900': '#78350f',
+      main: '#F2994A',
+      light: '#FCEFCA',
+      dark: '#F2C94C',
     },
     success: {
       main: '#219653',
@@ -32,6 +18,11 @@ const theme = createTheme({
     },
     error: {
       main: '#EB5757',
+    },
+    grey: {
+      '100': '#F2F2F2',
+      '300': '#E0E0E0',
+      '500': '#4F4F4F',
     },
     background: {
       default: '#FFF',

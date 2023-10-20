@@ -1,13 +1,20 @@
 import * as React from 'react';
-import { Box, InputBase, InputLabel, Typography } from '@mui/material';
+import {
+  Box,
+  InputBase,
+  InputLabel,
+  Typography,
+  Checkbox,
+  FormControlLabel,
+  Stack,
+} from '@mui/material';
 import Image from 'next/image';
 import { StyledButton } from '../../theme';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Link from 'next/link';
-
-const SignIn = () => {
+const SignUp = () => {
   return (
-    <Box mt="8%">
+    <Box mt="5%">
       <Box
         display="flex"
         flexDirection="column"
@@ -18,8 +25,8 @@ const SignIn = () => {
           textAlign: 'left',
         }}
       >
-        <Typography variant="h1" mb="64px">
-          Register
+        <Typography variant="h1" mb="40px">
+          Sign in
         </Typography>
         <InputLabel htmlFor="email-input" sx={{ mr: '74%' }}>
           Email address
@@ -28,12 +35,39 @@ const SignIn = () => {
           id="email-input"
           fullWidth
           sx={{
-            m: '10px 0 30px 0',
+            m: '10px 0 20px 0',
             bgcolor: '#f4f4f4',
             borderRadius: '0.38rem',
             p: '12px',
           }}
         />
+        <InputLabel htmlFor="password-input" sx={{ mr: '74%' }}>
+          Password
+        </InputLabel>
+        <InputBase
+          type="password"
+          id="password-input"
+          fullWidth
+          sx={{
+            my: '10px',
+            bgcolor: '#f4f4f4',
+            borderRadius: '0.38rem',
+            p: '12px',
+          }}
+        />
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          my={1}
+          width="100%"
+          justifyContent="space-between"
+        >
+          <FormControlLabel control={<Checkbox />} label="Keep me signed in" />
+          <Link href="/forgotpassword" color="blue" style={{ textDecoration: 'none' }}>
+            <Typography color="primary">Forgot Password ?</Typography>
+          </Link>
+        </Box>
         <StyledButton
           variant="contained"
           size="large"
@@ -58,17 +92,27 @@ const SignIn = () => {
           size="large"
           fullWidth
           variant="contained"
-          sx={{ bgcolor: 'primary[900]' }}
+          sx={{ bgcolor: 'primary.dark' }}
           startIcon={<FacebookIcon />}
         >
           Continue With Facebook
         </StyledButton>
-        <Typography variant="h3" mt={7} mr={5}>
-          Already have an account ? <Link href="/signin"> Sign In</Link>
-        </Typography>
+
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          my={4}
+          justifyContent="space-between"
+        >
+          <Typography variant="h3">Don't Have an account ?</Typography>
+          <Link href="/signin" color="blue" style={{ textDecoration: 'none', marginLeft: '8px' }}>
+            <Typography color="primary">Sign In</Typography>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
 };
 
-export default SignIn;
+export default SignUp;
