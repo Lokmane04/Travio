@@ -1,0 +1,3 @@
+const zied = 'fe';
+
+export {};

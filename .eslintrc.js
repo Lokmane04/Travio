@@ -13,9 +13,8 @@ module.exports = {
     'prettier',
   ],
   overrides: [
-    // override "simple-import-sort" config
     {
-      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx', '!*.eslintrc.js', '!next.config.js'],
       rules: {
         'simple-import-sort/imports': [
           'error',
@@ -47,6 +46,9 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['react', '@typescript-eslint', 'simple-import-sort', 'prettier'],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
   rules: {
     eqeqeq: 'off',
     strict: 'off',
