@@ -14,17 +14,18 @@ const theme = createTheme({
       '800': '#1e40af',
       '900': '#475993',
     },
-    // secondary: {
-    //   '100': '#FCEFCA',
-    //   '200': '#fde68a',
-    //   '300': '#fcd34d',
-    //   '400': '#F2C94C',
-    //   '500': '#f59e0b',
-    //   '600': '#F2994A',
-    //   '700': '#b45309',
-    //   '800': '#92400e',
-    //   '900': '#78350f',
-    // },
+    secondary: {
+      A400: '#5f4f4f',
+      '100': '#FCEFCA',
+      '200': '#fde68a',
+      '300': '#fcd34d',
+      '400': '#F2C94C',
+      '500': '#f59e0b',
+      '600': '#F2994A',
+      '700': '#b45309',
+      '800': '#92400e',
+      '900': '#78350f',
+    },
     success: {
       main: '#219653',
       light: '#85E0AB',
@@ -37,7 +38,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ['SF Pro Display', 'Arial', 'sans-serif'].join(','),
+    fontFamily: ['SF Pro Display', 'Noto Sans Display', 'Arial', 'sans-serif'].join(','),
     h1: {
       fontSize: '2rem',
       fontStyle: 'normal',
@@ -97,9 +98,15 @@ const theme = createTheme({
 export const StyledButton = styled(Button)({
   borderRadius: '0.38rem',
   display: 'flex',
-  p: '0.75rem 1.125rem',
+  p: '12px 18px',
   justifyContent: 'center',
   alignItems: 'center',
+  fontSize: '15px',
+  fontWeight: '500',
+  lineHeight: '20px',
+  letterSpacing: '0.02em',
+  textAlign: 'left',
+  textTransform: 'none',
 });
 
 export default theme;
