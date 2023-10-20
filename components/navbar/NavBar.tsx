@@ -42,7 +42,7 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ p: '10px 100px', bgcolor: '#fff' }}>
+    <AppBar position="sticky" sx={{ p: '10px ', bgcolor: '#fff', boxShadow: 0 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Image src="/images/default-logo.svg" alt="logo" width="70" height="70" />

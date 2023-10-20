@@ -1,6 +1,9 @@
+'use client';
+
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { toast, Toaster } from 'sonner';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import {
@@ -71,14 +74,22 @@ const SignIn = () => {
             <Typography color="primary">Forgot Password ?</Typography>
           </Link>
         </Box>
-        <StyledButton
-          variant="contained"
-          size="large"
-          fullWidth
-          sx={{ mb: '30px', p: '12px 18px' }}
-        >
-          Continue With Email
-        </StyledButton>
+        <Box m={0} p={0} width="100%">
+          <Toaster richColors expand={false} position="top-right" />
+          <StyledButton
+            onClick={() => {
+              toast.error('signed in successfully', {
+                description: 'authentification is not working right now please comback later',
+              });
+            }}
+            variant="contained"
+            size="large"
+            fullWidth
+            sx={{ mb: '30px', p: '12px 18px' }}
+          >
+            Continue With Email
+          </StyledButton>
+        </Box>
         <Box width="100%" mb={1}>
           <Divider>or use one of these options</Divider>
         </Box>
