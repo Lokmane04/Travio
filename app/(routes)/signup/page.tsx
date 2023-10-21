@@ -10,15 +10,20 @@ import { Box, Divider, InputBase, InputLabel, Typography } from '@mui/material';
 
 import { StyledButton } from '../../../theme';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { useRouter } from 'next/navigation';
 const SignUp = () => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: { email: '' },
     onSubmit: (values) => {
-      console.log(values);
       router.push('/checkinbox');
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .max(30, ' email must be 30 characteres or less')
+        .required('Please Enter your email'),
+    }),
   });
   return (
     <Box mt="8%">
@@ -38,18 +43,22 @@ const SignUp = () => {
         <form onSubmit={formik.handleSubmit} style={{ margin: '0', padding: '0', width: '100%' }}>
           <InputLabel htmlFor="email-input">Email address</InputLabel>
           <InputBase
+            error={formik.errors.email === typeof '' ? true : false}
             name="email"
             id="email-input"
             fullWidth
             value={formik.values.email}
             onChange={formik.handleChange}
             sx={{
-              m: '10px 0 30px 0',
+              m: '10px 0',
               bgcolor: '#f4f4f4',
               borderRadius: '0.38rem',
               p: '12px',
             }}
           />
+          <Typography color="error" mb="20px" variant="body2">
+            {formik.errors.email}
+          </Typography>
           <StyledButton
             variant="contained"
             size="large"

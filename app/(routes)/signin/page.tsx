@@ -17,8 +17,27 @@ import {
 } from '@mui/material';
 
 import { StyledButton } from '../../../theme';
+import { useRouter } from 'next/navigation';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const SignIn = () => {
+  const router = useRouter();
+  const formik = useFormik({
+    initialValues: { email: '', password: '' },
+    onSubmit: (values) => {
+      console.log(values);
+      router.push('/checkinbox');
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .max(30, ' email must be 30 characteres or less')
+        .required('Please Enter your email'),
+      password: Yup.string()
+        .min(8, 'password must be at least 8 characteres long')
+        .required('password should not be empty'),
+    }),
+  });
   return (
     <Box mt="5%">
       <Box
@@ -34,33 +53,50 @@ const SignIn = () => {
         <Typography variant="h1" mb="40px">
           Sign In
         </Typography>
-        <InputLabel htmlFor="email-input" sx={{ mr: '74%' }}>
-          Email address
-        </InputLabel>
-        <InputBase
-          id="email-input"
-          fullWidth
-          sx={{
-            m: '10px 0 20px 0',
-            bgcolor: '#f4f4f4',
-            borderRadius: '0.38rem',
-            p: '12px',
-          }}
-        />
-        <InputLabel htmlFor="password-input" sx={{ mr: '74%' }}>
-          Password
-        </InputLabel>
-        <InputBase
-          type="password"
-          id="password-input"
-          fullWidth
-          sx={{
-            my: '10px',
-            bgcolor: '#f4f4f4',
-            borderRadius: '0.38rem',
-            p: '12px',
-          }}
-        />
+        <form onSubmit={formik.handleSubmit} style={{ margin: '0', padding: '0', width: '100%' }}>
+          <InputLabel htmlFor="email-input" sx={{ mr: '74%' }}>
+            Email address
+          </InputLabel>
+          <InputBase
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            name="email"
+            error={formik.errors.email === typeof '' ? true : false}
+            id="email-input"
+            fullWidth
+            sx={{
+              m: '10px 0 20px 0',
+              bgcolor: '#f4f4f4',
+              borderRadius: '0.38rem',
+              p: '12px',
+            }}
+          />
+          <Typography color="error" variant="body2" mb="20px">
+            {formik.errors.email}
+          </Typography>
+          <InputLabel htmlFor="password-input" sx={{ mr: '74%' }}>
+            Password
+          </InputLabel>
+          <InputBase
+            onBlur={formik.handleBlur}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            name="password"
+            error={formik.errors.email === typeof '' ? true : false}
+            type="password"
+            id="password-input"
+            fullWidth
+            sx={{
+              my: '10px',
+              bgcolor: '#f4f4f4',
+              borderRadius: '0.38rem',
+              p: '12px',
+            }}
+          />
+          <Typography color="error" variant="body2" mb="20px">
+            {formik.touched.password && formik.errors.password}
+          </Typography>
+        </form>
         <Box
           display="flex"
           flexDirection="row"
@@ -78,8 +114,8 @@ const SignIn = () => {
           <Toaster richColors expand={false} position="top-right" />
           <StyledButton
             onClick={() => {
-              toast.error('signed in successfully', {
-                description: 'authentification is not working right now please comback later',
+              toast.error('Oops', {
+                description: 'Something went wrong , please try again',
               });
             }}
             variant="contained"
