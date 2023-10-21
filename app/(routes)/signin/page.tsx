@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { StyledButton } from '../../theme';
+import { StyledButton } from '../../../theme';
 
 const SignIn = () => {
   return (

@@ -47,7 +47,7 @@ const theme = createTheme({
     },
     h3: {
       color: '#181818',
-      fontSize: '1rem',
+      fontSize: '0.9rem',
       fontStyle: 'normal',
       fontWeight: 500,
       lineHeight: 'normal',

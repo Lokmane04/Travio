@@ -12,12 +12,12 @@ const ForgotPassword = () => {
         flexDirection="column"
         alignItems="center"
         sx={{
-          width: '25vw',
+          width: '30%',
           mx: 'auto',
           textAlign: 'left',
         }}
       >
-        <Typography variant="h1" mb="10px">
+        <Typography variant="h1" mb="10px" p={0}>
           Forgot your password ?
         </Typography>
         <Typography variant="subtitle1" textAlign="center" mb="30px">

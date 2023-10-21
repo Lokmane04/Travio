@@ -6,7 +6,7 @@ import Link from 'next/link';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Box, Divider, InputBase, InputLabel, Typography } from '@mui/material';
 
-import { StyledButton } from '../../theme';
+import { StyledButton } from '../../../theme';
 
 const SignUp = () => {
   return (
