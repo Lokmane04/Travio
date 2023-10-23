@@ -1,29 +1,32 @@
 'use client';
 
 import * as React from 'react';
-
+import { useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import * as Yup from 'yup';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { Box, Divider, InputBase, InputLabel, Typography } from '@mui/material';
 
 import { StyledButton } from '../../../theme';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useRouter } from 'next/navigation';
+
 const SignUp = () => {
-  const router = useRouter();
+  let search;
+  // const router = useRouter();
+  const searchParams = useSearchParams();
   const formik = useFormik({
     initialValues: { email: '' },
-    onSubmit: (values) => {
-      router.push('/checkinbox');
-    },
     validationSchema: Yup.object({
       email: Yup.string()
         .max(30, ' email must be 30 characteres or less')
         .required('Please Enter your email'),
     }),
+    onSubmit: (values) => {
+      search = searchParams.get('email');
+      // router.push('/checkinbox');
+    },
   });
   return (
     <Box mt="8%">
@@ -37,13 +40,14 @@ const SignUp = () => {
           textAlign: 'left',
         }}
       >
+        {search}
         <Typography variant="h1" mb="64px">
           Register
         </Typography>
         <form onSubmit={formik.handleSubmit} style={{ margin: '0', padding: '0', width: '100%' }}>
           <InputLabel htmlFor="email-input">Email address</InputLabel>
           <InputBase
-            error={formik.errors.email === typeof '' ? true : false}
+            error={formik.errors.email === typeof ''}
             name="email"
             id="email-input"
             fullWidth

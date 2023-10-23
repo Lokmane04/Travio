@@ -1,9 +1,14 @@
 'use client';
 
 import * as React from 'react';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useFormik } from 'formik';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { toast, Toaster } from 'sonner';
+import * as Yup from 'yup';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import {
@@ -17,17 +22,14 @@ import {
 } from '@mui/material';
 
 import { StyledButton } from '../../../theme';
-import { useRouter } from 'next/navigation';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 
 const SignIn = () => {
-  const router = useRouter();
+  // const supabase = createServerComponentClient({ cookies });
   const formik = useFormik({
     initialValues: { email: '', password: '' },
     onSubmit: (values) => {
-      console.log(values);
-      router.push('/checkinbox');
+      // SignInHandler()
+      redirect('/');
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -61,7 +63,7 @@ const SignIn = () => {
             value={formik.values.email}
             onChange={formik.handleChange}
             name="email"
-            error={formik.errors.email === typeof '' ? true : false}
+            error={formik.errors.email === typeof ''}
             id="email-input"
             fullWidth
             sx={{
@@ -82,7 +84,7 @@ const SignIn = () => {
             value={formik.values.password}
             onChange={formik.handleChange}
             name="password"
-            error={formik.errors.email === typeof '' ? true : false}
+            error={formik.errors.email === typeof ''}
             type="password"
             id="password-input"
             fullWidth

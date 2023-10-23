@@ -1,11 +1,16 @@
+'use client';
+
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { Box, Typography } from '@mui/material';
-import Link from 'next/link';
-import { StyledButton } from '@/theme';
-import Image from 'next/image';
+
+import { StyledButton } from '../../../theme';
 
 const CheckInbox = () => {
+  const router = useRouter();
   return (
     <Box mt="12%">
       <Box
@@ -25,7 +30,7 @@ const CheckInbox = () => {
         <Box display="flex" width="100%">
           <Typography variant="subtitle1" textAlign="center" my={2}>
             We have just emailed you the instrustions and a reset password link to
-            Sumail_john@gmail.com. It might take a few minutes to arrive
+            {router.query.email} . It might take a few minutes to arrive
           </Typography>
         </Box>
 
