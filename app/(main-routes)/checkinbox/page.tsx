@@ -3,14 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { Box, Typography } from '@mui/material';
 
 import { StyledButton } from '../../../theme';
 
 const CheckInbox = () => {
-  const router = useRouter();
   return (
     <Box mt="12%">
       <Box
@@ -29,8 +27,8 @@ const CheckInbox = () => {
         </Typography>
         <Box display="flex" width="100%">
           <Typography variant="subtitle1" textAlign="center" my={2}>
-            We have just emailed you the instrustions and a reset password link to
-            {router.query.email} . It might take a few minutes to arrive
+            We have just emailed you the instrustions and a reset password link to your inbox. It
+            might take a few minutes to arrive
           </Typography>
         </Box>
 
