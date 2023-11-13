@@ -1,9 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useFormik } from 'formik';
-import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -63,7 +61,7 @@ const SignIn = () => {
             value={formik.values.email}
             onChange={formik.handleChange}
             name="email"
-            error={formik.errors.email === typeof ''}
+            error={Boolean(formik.errors.email)}
             id="email-input"
             fullWidth
             sx={{
