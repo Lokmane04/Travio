@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
-
-type RegisterFormData = {
+import { useMutation } from "react-query";
+import * as apiClient from "../api-client";
+import { toast, Toaster } from "sonner";
+import { useNavigate } from "react-router-dom";
+export type RegisterFormData = {
   email: string;
   password: string;
   confirmPassword: string;
@@ -9,14 +12,35 @@ type RegisterFormData = {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
   const {
     register,
     watch,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormData>();
+  const mutation = useMutation(apiClient.register, {
+    onSuccess: () => {
+      toast.success("Welcome aboard!", {
+        icon: "🎉",
+        style: {
+          backgroundColor: "white",
+        },
+        description:
+          "Thanks for joining! We're excited to have you. Let's get started!",
+      });
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      // const clearNavigationTimeout = () => clearTimeout(timer);
+      // clearNavigationTimeout();
+    },
+    onError: (err: Error) => {
+      toast.error(err.message);
+    },
+  });
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    mutation.mutate(data);
   });
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
@@ -119,6 +143,15 @@ const Register = () => {
       >
         Create account
       </button>
+      <Toaster
+        richColors
+        toastOptions={{
+          className: "my-toast",
+        }}
+        expand
+        visibleToasts={1}
+        position="top-center"
+      />
     </form>
   );
 };

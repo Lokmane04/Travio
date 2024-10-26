@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="bg-blue-800 py-6 ">
+    <div className="bg-blue-800 py-6 !top-0">
       <div className="container mx-auto flex justify-between">
         <span className="text-white text-3xl font-bold tracking-tight">
           <Link to={"/"}>Travio</Link>
