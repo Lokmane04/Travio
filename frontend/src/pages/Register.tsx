@@ -1,157 +1,124 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
-import { toast, Toaster } from "sonner";
+import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+
 export type RegisterFormData = {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
-  firstName: string;
-  lastName: string;
 };
 
 const Register = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { showToast } = useAppContext();
+
   const {
     register,
     watch,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormData>();
+
   const mutation = useMutation(apiClient.register, {
-    onSuccess: () => {
-      toast.success("Welcome aboard!", {
-        icon: "🎉",
-        style: {
-          backgroundColor: "white",
-        },
-        description:
-          "Thanks for joining! We're excited to have you. Let's get started!",
-      });
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-      // const clearNavigationTimeout = () => clearTimeout(timer);
-      // clearNavigationTimeout();
+    onSuccess: async () => {
+      showToast({ message: "Registration Success!", type: "SUCCESS" });
+      await queryClient.invalidateQueries("validateToken");
+      navigate("/");
     },
-    onError: (err: Error) => {
-      toast.error(err.message);
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: "ERROR" });
     },
   });
+
   const onSubmit = handleSubmit((data) => {
     mutation.mutate(data);
   });
+
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-      <h1 className="text-3xl font-bold ">Create an Account</h1>
+      <h2 className="text-3xl font-bold">Create an Account</h2>
       <div className="flex flex-col md:flex-row gap-5">
-        <label className="py-0 text-sm font-bold text-gray-700 flex-1">
+        <label className="text-gray-700 text-sm font-bold flex-1">
           First Name
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            type="text"
-            {...register("firstName", {
-              required: "Please enter your first name.",
-            })}
-          />
+            {...register("firstName", { required: "This field is required" })}
+          ></input>
           {errors.firstName && (
-            <span className="text-red-500 font-bold text-xs py-0">
-              {errors.firstName.message}
-            </span>
+            <span className="text-red-500">{errors.firstName.message}</span>
           )}
         </label>
-        <label className="py-0 text-sm font-bold text-gray-700 flex-1">
+        <label className="text-gray-700 text-sm font-bold flex-1">
           Last Name
           <input
             className="border rounded w-full py-1 px-2 font-normal"
-            type="text"
-            {...register("lastName", {
-              required: "Please enter your last name.",
-            })}
-          />
+            {...register("lastName", { required: "This field is required" })}
+          ></input>
           {errors.lastName && (
-            <span className="text-red-500 font-bold text-xs py-0">
-              {errors.lastName.message}
-            </span>
+            <span className="text-red-500">{errors.lastName.message}</span>
           )}
         </label>
       </div>
-      <label className="py-0 text-sm font-bold text-gray-700 flex-1 ">
+      <label className="text-gray-700 text-sm font-bold flex-1">
         Email
         <input
-          className="border rounded w-full py-1 px-2 font-normal"
           type="email"
-          {...register("email", {
-            required: "Please enter your email.",
-          })}
-        />
+          className="border rounded w-full py-1 px-2 font-normal"
+          {...register("email", { required: "This field is required" })}
+        ></input>
         {errors.email && (
-          <span className="text-red-500 font-bold text-xs py-0">
-            {errors.email.message}
-          </span>
+          <span className="text-red-500">{errors.email.message}</span>
         )}
       </label>
-
-      <label className="py-0 text-sm font-bold text-gray-700 flex-1">
+      <label className="text-gray-700 text-sm font-bold flex-1">
         Password
         <input
-          className="border rounded w-full py-1 px-2 font-normal"
           type="password"
+          className="border rounded w-full py-1 px-2 font-normal"
           {...register("password", {
-            required: "Please enter your email.",
+            required: "This field is required",
             minLength: {
               value: 6,
-              message: "Password must be at least 4 characteres.",
+              message: "Password must be at least 6 characters",
             },
           })}
-        />
+        ></input>
         {errors.password && (
-          <span className="text-red-500 font-bold text-xs py-0">
-            {errors.password.message}
-          </span>
+          <span className="text-red-500">{errors.password.message}</span>
         )}
       </label>
-
-      <label className="py-0 text-sm font-bold text-gray-700 flex-1">
-        Confirm password
+      <label className="text-gray-700 text-sm font-bold flex-1">
+        Confirm Password
         <input
-          className="border rounded w-full py-1 px-2 font-normal"
           type="password"
+          className="border rounded w-full py-1 px-2 font-normal"
           {...register("confirmPassword", {
-            required: "Please enter your email.",
             validate: (val) => {
               if (!val) {
                 return "This field is required";
               } else if (watch("password") !== val) {
-                return "The passwords don't match";
+                return "Your passwords do no match";
               }
             },
           })}
-        />
+        ></input>
         {errors.confirmPassword && (
-          <span className="text-red-500 font-bold text-xs py-0">
-            {errors.confirmPassword.message}
-          </span>
+          <span className="text-red-500">{errors.confirmPassword.message}</span>
         )}
       </label>
-
-      <span></span>
-      <button
-        type="submit"
-        className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500"
-      >
-        Create account
-      </button>
-      <Toaster
-        richColors
-        toastOptions={{
-          className: "my-toast",
-        }}
-        expand
-        visibleToasts={1}
-        position="top-center"
-      />
+      <span>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
+        >
+          Create Account
+        </button>
+      </span>
     </form>
   );
 };

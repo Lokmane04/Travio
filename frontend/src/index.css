@@ -7,4 +7,13 @@ html {
 }
 #root {
   background-color: white !important;
+  z-index: 1000 !important;
+  top: 0;
+  left: 0;
+}
+.my-toast {
+  z-index: -900 !important;
+  top: -50 !important;
+  left: 800 !important;
+  display: none;
 }
