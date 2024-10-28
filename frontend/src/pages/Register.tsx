@@ -114,7 +114,7 @@ const Register = () => {
       <span className="flex items-center justify-between">
         <span className="text-sm">
           Already signed in?
-          <Link className="underline text-blue-600 ml-1" to="/register">
+          <Link className="underline text-blue-600 ml-1" to="/sign-in">
             Log into your account
           </Link>
         </span>
