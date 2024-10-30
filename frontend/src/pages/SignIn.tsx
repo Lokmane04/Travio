@@ -14,7 +14,7 @@ const SignIn = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<SignInFormData>();
   const mutation = useMutation(apiClient.signIn, {
@@ -76,7 +76,11 @@ const SignIn = () => {
         <button
           type="submit"
           className="bg-blue-600 text-white py-2 px-8 rounded-sm font-bold hover:bg-blue-500 text-xl"
+          disabled={isSubmitting}
         >
+          {isSubmitting && (
+            <span className="spinner-border spinner-border-sm mr-1"></span>
+          )}
           Login
         </button>
       </span>

@@ -21,7 +21,7 @@ const Register = () => {
     register,
     watch,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>();
 
   const mutation = useMutation(apiClient.register, {
@@ -121,7 +121,11 @@ const Register = () => {
         <button
           type="submit"
           className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
+          disabled={isSubmitting}
         >
+          {isSubmitting && (
+            <span className="spinner-border spinner-border-sm mr-1"></span>
+          )}
           Create Account
         </button>
       </span>

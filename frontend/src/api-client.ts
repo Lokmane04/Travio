@@ -1,3 +1,4 @@
+import { HotelType } from "./../../backend/src/models/hotel";
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
@@ -67,4 +68,14 @@ export const addMyHotel = async (hotelFormData: FormData) => {
     throw new Error("failed to add hotel");
   }
   return response.json();
+};
+
+export const fetchMyHotels = async (): Promise<HotelType[]> => {
+  const res = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+    credentials: "include",
+  });
+  if (!res.ok) {
+    throw new Error("Error fetching hotels");
+  }
+  return res.json();
 };

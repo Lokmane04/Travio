@@ -72,7 +72,10 @@ const ManageHotelForm = ({ onSave, isLoading }: Props) => {
           type="submit"
           className="disabled:bg-slate-500 float-end m-3 rounded-sm bg-blue-600 text-white py-3 px-6 font-bold hover:bg-blue-500 text-xl"
         >
-          {isLoading ? "Saving..." : "Save"}
+          {isLoading && (
+            <span className="spinner-border spinner-border-sm mr-1"></span>
+          )}
+          {isLoading ? <span>Saving...</span> : <span>Save</span>}
         </button>
       </form>
     </FormProvider>
