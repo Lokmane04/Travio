@@ -1,77 +1,3 @@
-// import { FormEvent, useState } from "react";
-// import { useSearchContext } from "../../contexts/SearchContext";
-// import { MdTravelExplore } from "react-icons/md";
-
-// const SearchBar = () => {
-//   const search = useSearchContext();
-
-//   const [destination, setDestination] = useState<string>(search.destination);
-//   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
-//   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
-//   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
-//   const [childCount, setChildCount] = useState<number>(search.childCount);
-
-//   const handleSubmit = (event: FormEvent) => {
-//     event.preventDefault();
-
-//     search.saveSearchValues(
-//       destination,
-//       checkIn,
-//       checkOut,
-//       childCount,
-//       adultCount
-//     );
-//   };
-//   return (
-//     <form
-//       onSubmit={handleSubmit}
-//       className="-mt-8 p-3 bg-teal-500 rounded-md shadow-md grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 items-center gap-4"
-//     >
-//       <div className="flex flex-row items-center flex-1 bg-white p-2 rounded-md">
-//         <MdTravelExplore size={25} className="mr-2" />
-//         <input
-//           className="text-base w-full focus:outline-none"
-//           type="text"
-//           placeholder="Where are you going ?"
-//           onChange={(e) => {
-//             setDestination(e.target.value);
-//           }}
-//         />
-//         <div className="flex bg-white px-2 py-1 gap-2">
-//           <label className="items-center flex">
-//             Adults:
-//             <input
-//               type="number"
-//               min={1}
-//               max={8}
-//               className="focus:outline-none font-bold"
-//               value={adultCount}
-//               onChange={(e) => {
-//                 setAdultCount(parseInt(e.target.value));
-//               }}
-//             />
-//           </label>
-//           <label className="items-center flex">
-//             Children:
-//             <input
-//               type="number"
-//               min={0}
-//               max={20}
-//               className="focus:outline-none font-bold"
-//               value={childCount}
-//               onChange={(e) => {
-//                 setChildCount(parseInt(e.target.value));
-//               }}
-//             />
-//           </label>
-//         </div>
-//       </div>
-//     </form>
-//   );
-// };
-
-// export default SearchBar;
-
 import { FormEvent, useState } from "react";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { MdTravelExplore } from "react-icons/md";
@@ -89,7 +15,7 @@ const SearchBar = () => {
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
 
-  const handleSubmit = (event: FormEvent) => {
+  const handleSearchSave = (event: FormEvent) => {
     event.preventDefault();
     search.saveSearchValues(
       destination,
@@ -107,10 +33,10 @@ const SearchBar = () => {
 
   return (
     <form
-      onSubmit={handleSubmit}
-      className="-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center gap-4 min-w-fit self-center"
+      onSubmit={handleSearchSave}
+      className="-mt-8 p-3 bg-orange-400 rounded shadow-md grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center gap-4 min-w-fit self-center "
     >
-      <div className="flex flex-row items-center flex-1 bg-white p-2">
+      <div className="flex flex-row items-center flex-1 bg-white p-2 rounded-md">
         <MdTravelExplore size={25} className="mr-2" />
         <input
           placeholder="Where are you going?"
@@ -120,7 +46,7 @@ const SearchBar = () => {
         />
       </div>
 
-      <div className="flex bg-white px-2 py-1 gap-2">
+      <div className="flex bg-white px-2 py-1 gap-2 rounded-md">
         <label className="items-center flex">
           Adults:
           <input
@@ -144,7 +70,7 @@ const SearchBar = () => {
           />
         </label>
       </div>
-      <div>
+      <div className="rounded-md ">
         <DatePicker
           selected={checkIn}
           onChange={(date) => setCheckIn(date as Date)}
@@ -154,8 +80,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
-          wrapperClassName="min-w-full"
+          className="bg-white p-2 w focus:outline-none rounded-md"
         />
       </div>
       <div>
@@ -168,17 +93,16 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-out Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
-          wrapperClassName="min-w-full"
+          className="bg-white p-2 w focus:outline-none mr-4 rounded-md"
         />
       </div>
       <div className="flex gap-1 ml-3">
-        <button className="flex-1 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500 rounded-sm">
+        <button className="w-1/2 bg-blue-600 rounded-md text-white h-full p-2 text-base hover:bg-blue-500">
           Search
         </button>
-        {/* <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+        <button className="w-1/2 bg-red-600 rounded-md text-white h-full p-2 text-base hover:bg-red-500">
           Clear
-        </button> */}
+        </button>
       </div>
     </form>
   );
