@@ -4,7 +4,7 @@ export type HotelSearchResponse = {
   data: HotelType[];
   pagination: {
     total: number;
-    pageNumber: number;
-    numberOfPages: number;
+    page: number;
+    pages: number;
   };
 };
