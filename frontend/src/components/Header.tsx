@@ -15,12 +15,6 @@ const Header = () => {
             <>
               <Link
                 className="flex items-center text-white px-3 font-bold hover:bg-blue-600"
-                to={"/my-bookings"}
-              >
-                My bookings
-              </Link>
-              <Link
-                className="flex items-center text-white px-3 font-bold hover:bg-blue-600"
                 to={"/my-hotels"}
               >
                 My hotels

@@ -37,8 +37,8 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", hotelRoutes);
 

@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import Hotel from "../models/hotel";
 import { HotelSearchResponse } from "../types/search";
 import { param, validationResult } from "express-validator";
+import verifyToken from "../middleware/auth";
+import { BookingType } from "../types/hotel";
 
 const router = express.Router();
 
@@ -125,5 +127,33 @@ const constructSearchQuery = (queryParams: any) => {
 
   return constructedQuery;
 };
+router.post(
+  "/:hotelId/bookings",
+  verifyToken,
+  async (req: Request, res: Response) => {
+    try {
+      const newBooking: BookingType = {
+        ...req.body,
+        userId: req.userId,
+      };
 
+      const hotel = await Hotel.findOneAndUpdate(
+        { _id: req.params.hotelId },
+        {
+          $push: { bookings: newBooking },
+        }
+      );
+
+      if (!hotel) {
+        return res.status(400).json({ message: "hotel not found" });
+      }
+
+      await hotel.save();
+      res.status(200).send();
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "something went wrong" });
+    }
+  }
+);
 export default router;
