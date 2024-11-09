@@ -28,7 +28,7 @@ test("should show hotel detail", async ({ page }) => {
   await page.getByPlaceholder("Where are you going?").fill("Algiers");
   await page.getByRole("button", { name: "Search" }).click();
 
-  await page.getByText("Algiers").click();
+  await page.getByText("Ibis Hotel").click();
   await expect(page).toHaveURL(/detail/);
   await expect(page.getByRole("button", { name: "Book now" })).toBeVisible();
 });

@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto(UI_URL);
   await page.getByRole("link", { name: "Sign in" }).click();
   await expect(page.getByRole("heading", { name: "Sign In" })).toBeVisible();
-  await page.locator("[name=email]").fill("baslilokma04@gmail.com");
+  await page.locator("[name=email]").fill("anaya@gmail.com");
   await page.locator("[name=password]").fill("aaaaaaaa");
   await page.getByRole("button", { name: "Login" }).click();
   await expect(page.getByText("Homepage")).toBeVisible();
