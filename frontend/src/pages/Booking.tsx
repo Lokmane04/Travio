@@ -22,18 +22,6 @@ const Booking = () => {
     }
   }, [search.checkIn, search.checkOut]);
 
-  const { data: paymentIntentData } = useQuery(
-    "createPaymentIntent",
-    () =>
-      apiClient.createPaymentIntent(
-        hotelId as string,
-        numberOfNights.toString()
-      ),
-    {
-      enabled: !!hotelId && numberOfNights > 0,
-    }
-  );
-
   const { data: hotel } = useQuery(
     "fetchHotelByID",
     () => apiClient.fetchHotelById(hotelId as string),
