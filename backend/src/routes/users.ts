@@ -46,7 +46,7 @@ router.post(
         return res.status(400).json({ message: "User already exists" });
       }
 
-      user = new User({ _id: { $oid: "672fe3e377701104888b05c3" } }, req.body);
+      user = new User(req.body);
       await user.save();
 
       const token = jwt.sign(
